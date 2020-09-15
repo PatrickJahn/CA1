@@ -47,5 +47,16 @@ public class GroupMemberFacade {
         }
         
     }
+    
+    public long getAllGroupMembers(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
+            return renameMeCount;
+        }finally{  
+            em.close();
+        }
+        
+    }
 
 }
