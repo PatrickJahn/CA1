@@ -24,7 +24,25 @@ public class Joke implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String joke;
+    private String reference; 
+    private String type; 
 
+    public Joke() {
+    }
+
+    
+    
+
+
+    public Joke(String joke, String reference, String type) {
+        this.joke = joke;
+        this.reference = reference;
+        this.type = type;
+    }
+    
+    
+    
     public Long getId() {
         return id;
     }
@@ -33,29 +51,35 @@ public class Joke implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getJoke() {
+        return joke;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Joke)) {
-            return false;
-        }
-        Joke other = (Joke) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public String getReference() {
+        return reference;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setJoke(String joke) {
+        this.joke = joke;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        return "entities.Jokes[ id=" + id + " ]";
+        return "Joke{" + "id=" + id + ", joke=" + joke + ", reference=" + reference + ", type=" + type + '}';
     }
+
+   
     
 }

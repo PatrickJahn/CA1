@@ -1,7 +1,8 @@
 package facades;
 
+import DTO.JokeDTO;
 import utils.EMF_Creator;
-import entities.GroupMember;
+import entities.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -14,19 +15,20 @@ import org.junit.jupiter.api.Test;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-@Disabled
 public class JokeFacadeTest {
 
     private static EntityManagerFactory emf;
-    private static CarFacade facade;
+    private static JokeFacade facade;
 
+    private Joke j1 = new Joke();
+    
     public JokeFacadeTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
-       facade = CarFacade.getFacadeExample(emf);
+       facade = JokeFacade.getFacadeExample(emf);
     }
 
     @AfterAll
@@ -41,9 +43,10 @@ public class JokeFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new GroupMember("Some txt", "More text"));
-            em.persist(new GroupMember("aaa", "bbb"));
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
+          j1 = new Joke("Joke1", "More text", "test");
+          em.persist(j1);
+            em.persist(new Joke("aaa", "bbb", "test"));
 
             em.getTransaction().commit();
         } finally {
@@ -56,10 +59,17 @@ public class JokeFacadeTest {
 //        Remove any data after each test was run
     }
 
-    // TODO: Delete or change this method 
+    
     @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+    public void testGetCount() {
+        assertEquals(2, facade.getJokeCount(), "Expects two rows in the database");
+    }
+    
+    
+     @Test
+    public void testGetByID() {
+        JokeDTO joke = facade.getJokeByID(j1.getId());
+        assertEquals("Joke1", joke.getJoke());
     }
 
 }

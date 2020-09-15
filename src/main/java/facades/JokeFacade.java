@@ -1,10 +1,13 @@
 package facades;
 
-import entities.GroupMember;
+import DTO.JokeDTO;
+import entities.Joke;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -36,16 +39,46 @@ public class JokeFacade {
         return emf.createEntityManager();
     }
     
-    //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+ 
+    public long getJokeCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
+            long renameMeCount = (long)em.createQuery("SELECT COUNT(j) FROM Joke j").getSingleResult();
             return renameMeCount;
         }finally{  
             em.close();
         }
         
     }
+    
+    public List<JokeDTO> getAllJokes(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            TypedQuery<Joke> tq = em.createQuery("SELECT j FROM Joke j", Joke.class);
+            List<Joke> jokes = tq.getResultList();
+            List<JokeDTO> jokesDTO = new ArrayList<>(); 
+            for (Joke j : jokes){
+                jokesDTO.add(new JokeDTO(j));
+            }
+            return jokesDTO;
+        }finally{  
+            em.close();
+        }
+        
+    }
 
+    
+     public JokeDTO getJokeByID(Long id){
+        EntityManager em = emf.createEntityManager();
+        try{
+            Joke joke = em.find(Joke.class, id);
+            return new JokeDTO(joke);
+        }finally{  
+            em.close();
+        }
+    }
+     
+     
+     
+     
 }
