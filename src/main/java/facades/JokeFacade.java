@@ -72,6 +72,9 @@ public class JokeFacade {
         EntityManager em = emf.createEntityManager();
         try{
             Joke joke = em.find(Joke.class, id);
+            if (joke == null){
+                return new JokeDTO(new Joke());
+            }
             return new JokeDTO(joke);
         }finally{  
             em.close();

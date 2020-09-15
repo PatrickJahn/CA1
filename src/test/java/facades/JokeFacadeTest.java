@@ -71,5 +71,11 @@ public class JokeFacadeTest {
         JokeDTO joke = facade.getJokeByID(j1.getId());
         assertEquals("Joke1", joke.getJoke());
     }
+    
+     @Test
+    public void testGetByIDNegativ() {
+        JokeDTO joke = facade.getJokeByID((long) 1100);
+        assertEquals(null, joke.getJoke());
+    }
 
 }
