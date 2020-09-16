@@ -1,11 +1,13 @@
 package facades;
 
-import entities.GroupMember;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
+import DTO.CarDTO;
+import entities.Car;
+import java.util.ArrayList;
+import javax.persistence.TypedQuery;
 /**
  *
  * Rename Class to a relevant name Add add relevant facade methods
@@ -41,6 +43,22 @@ public class CarFacade {
         try{
             long renameMeCount = (long)em.createQuery("SELECT COUNT(c) FROM Car c").getSingleResult();
             return renameMeCount;
+        }finally{  
+            em.close();
+        }
+        
+    }
+    
+       public List<CarDTO> getAllJokes(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            TypedQuery<Car> tq = em.createQuery("SELECT c FROM Car c", Car.class);
+            List<Car> cars = tq.getResultList();
+            List<CarDTO> CarDTO = new ArrayList<>(); 
+            for (Car c : cars){
+                CarDTO.add(new CarDTO(c));
+            }
+            return CarDTO;
         }finally{  
             em.close();
         }
