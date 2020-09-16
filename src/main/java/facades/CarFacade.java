@@ -35,12 +35,11 @@ public class CarFacade {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
-    //TODO Remove/Change this before use
+ 
     public long getRenameMeCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
+            long renameMeCount = (long)em.createQuery("SELECT COUNT(c) FROM Car c").getSingleResult();
             return renameMeCount;
         }finally{  
             em.close();
