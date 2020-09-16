@@ -36,7 +36,7 @@ public class JokeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getJokeCount() {
         long count = FACADE.getJokeCount();
-        //System.out.println("--------------->"+count);
+       
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
     

@@ -43,8 +43,8 @@ public class JokeFacade {
     public long getJokeCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(j) FROM Joke j").getSingleResult();
-            return renameMeCount;
+            long JokeCount = (long)em.createQuery("SELECT COUNT(j) FROM Joke j").getSingleResult();
+            return JokeCount;
         }finally{  
             em.close();
         }
@@ -88,10 +88,21 @@ public class JokeFacade {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
             
-            em.persist(new Joke("Joke1", "Ref1","SortHumor"));
-              em.persist(new Joke("Joke2", "Ref2","AlleBørnene"));
-               em.persist(new Joke("Joke3", "Ref3","AlleBørnene"));
-              em.getTransaction().commit();
+            em.persist(new Joke("Banke banke på\n" +
+"Hvem der?\n" +
+"– Finn\n" +
+"Finn hvem?\n" +
+"– Finn selv ud af det", "Vitser.dk","Banke Banke På"));
+              em.persist(new Joke("Alle børnene gik forbi lorten undtagen Stella hun troede det var Nutella.", "Vitser-jokes.dk","Alle Børnene"));
+              em.persist(new Joke("Alle børnene ristede pølser undtagen Niller han ristede sin diller", "Vitser-jokes.dk","AlleBørnene"));
+              em.persist(new Joke("Alle børnene kom sikkert hjem fra fabrikken undtagen Ib og Arne de blev til chili konkarne", "Vitser-jokes.dk","Alle Børnene"));
+              em.persist(new Joke("Din mor er som en dårlig fodboldkamp… man har ikke lyst til at se på hende.", "Vitser-jokes.dk","Din Mor"));
+              em.persist(new Joke("Jeg overvejer at gifte mig med en tysker er det over grænsen?", "Vitser-jokes.dk","Dårlige jokes"));
+              em.persist(new Joke("ja, du har ringet til selvmords linjen bliv lige hængende", "Vitser-jokes.dk","Dårlige jokes"));
+              em.persist(new Joke("Hvad er ligheden mellem tofu og en dildo? De er begge alternativer til kød.", "bedstejokes.dk","Grove jokes"));
+              em.persist(new Joke("Hvordan får du gjort en nonne gravid? Klæd hende ud som en kordreng", "bedstejokes.dk","Grove jokes"));
+
+               em.getTransaction().commit();
         }finally{  
             em.close();
         }

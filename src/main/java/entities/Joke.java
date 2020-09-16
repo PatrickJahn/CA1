@@ -32,8 +32,6 @@ public class Joke implements Serializable {
     }
 
     
- 
-
     public Joke(String joke, String reference, String type) {
         this.joke = joke;
         this.reference = reference;
