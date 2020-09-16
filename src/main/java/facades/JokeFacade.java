@@ -72,6 +72,9 @@ public class JokeFacade {
         EntityManager em = emf.createEntityManager();
         try{
             Joke joke = em.find(Joke.class, id);
+            if (joke == null){
+                return new JokeDTO(new Joke());
+            }
             return new JokeDTO(joke);
         }finally{  
             em.close();
@@ -79,6 +82,19 @@ public class JokeFacade {
     }
      
      
-     
+      public void addJokes(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
+            
+            em.persist(new Joke("Joke1", "Ref1","SortHumor"));
+              em.persist(new Joke("Joke2", "Ref2","AlleBørnene"));
+               em.persist(new Joke("Joke3", "Ref3","AlleBørnene"));
+              em.getTransaction().commit();
+        }finally{  
+            em.close();
+        }
+    }
      
 }
