@@ -87,8 +87,8 @@ public class JokeFacade {
         try{
          
          Random r = new Random();
-    int low = 10;
-    int high = 18;
+    int low = 1;
+    int high = 10;
     int result = r.nextInt(high-low) + low;
         return getJokeByID((long) result);
     
@@ -103,12 +103,9 @@ public class JokeFacade {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
             
-            em.persist(new Joke("Banke banke på, Hvem der?" +
-"– Finn" +
-"Finn hvem?" +
-"– Finn selv ud af det", "Vitser.dk","Banke Banke På"));
+            em.persist(new Joke("A programmer is told to \"go to hell\", he finds the worst part of that statement is the \"go to\"","reddit","Programming joke"));
               em.persist(new Joke("Alle børnene gik forbi lorten undtagen Stella hun troede det var Nutella.", "Vitser-jokes.dk","Alle Børnene"));
-              em.persist(new Joke("Alle børnene ristede pølser undtagen Niller han ristede sin diller", "Vitser-jokes.dk","AlleBørnene"));
+              em.persist(new Joke("Why do Java programmers wear glasses? - Beacuse they dont C#", "reddit","Programming joke"));
               em.persist(new Joke("Alle børnene kom sikkert hjem fra fabrikken undtagen Ib og Arne de blev til chili konkarne", "Vitser-jokes.dk","Alle Børnene"));
               em.persist(new Joke("Din mor er som en dårlig fodboldkamp… man har ikke lyst til at se på hende.", "Vitser-jokes.dk","Din Mor"));
               em.persist(new Joke("Jeg overvejer at gifte mig med en tysker er det over grænsen?", "Vitser-jokes.dk","Dårlige jokes"));

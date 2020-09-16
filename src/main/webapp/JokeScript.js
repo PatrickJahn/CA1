@@ -60,6 +60,10 @@ function getUrlAddOn(id){
 }
 
 var createHtmlForOne = function(json){
+    
+    if (json.Joke == "Not found"){
+        return "<tr><td></td><td>" + "There is no Jokes with that ID" + "</td><td></td>";
+    }
      var html = "<tr><td>" + json.joke + "</td>"+
             "<td>" + json.reference + "</td>"+
             "<td>: " + json.type +  
