@@ -4,7 +4,7 @@
 document.getElementById("jokeForm").addEventListener('click', getInfo);
 
   function getInfo(){
-    var url = "https://theonegruppetorulethemall.com.dk/CA1/api/Joke/";
+    var url = "https://theonegruppetorulethemall.com/CA1/api/Joke/";
     event.stopPropagation();
     event.preventDefault();
     
@@ -74,7 +74,7 @@ var createHtmlForMore = function(json){
     genHtml = res;
     }
     
-     var table ="<table><thead><tr><th>Title</th><th>Year</th><th>Genre</th><tbody>" + genHtml + "</tbody></table>" ;
+     var table ="<table><thead><tr><th>Joke</th><th>Reference</th><th>Type</th><tbody>" + genHtml + "</tbody></table>" ;
      
     return table;
 };
