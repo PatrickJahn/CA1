@@ -61,6 +61,12 @@ public class JokeResource {
         return Response.ok().entity(GSON.toJson(joke)).build();
     }
     
-    
+    @Path("addjokes")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String addJokes() {
+        FACADE.addJokes();
+        return "{\"Jokes\":\"Added\"}";
+    }
     
 }

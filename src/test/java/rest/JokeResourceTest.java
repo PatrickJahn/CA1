@@ -1,6 +1,5 @@
 package rest;
 
-import entities.GroupMember;
 import entities.Joke;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
@@ -140,5 +139,16 @@ public class JokeResourceTest {
         .assertThat()
         .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode())
         .body("Joke", equalTo("Not found"));   
+    }
+    
+    
+      @Test
+    public void testAddJokes() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/Joke/addjokes").then()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("Jokes", equalTo("Added"));   
     }
 }

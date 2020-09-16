@@ -77,5 +77,11 @@ public class JokeFacadeTest {
         JokeDTO joke = facade.getJokeByID((long) 1100);
         assertEquals(null, joke.getJoke());
     }
-
+    
+    
+    @Test
+    public void testAddJokes() {
+        facade.addJokes();
+        assertEquals(3, facade.getJokeCount(), "Expects three rows in the database");
+    }
 }
