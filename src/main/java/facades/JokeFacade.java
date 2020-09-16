@@ -88,10 +88,9 @@ public class JokeFacade {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
             
-            em.persist(new Joke("Banke banke på\n" +
-"Hvem der?\n" +
-"– Finn\n" +
-"Finn hvem?\n" +
+            em.persist(new Joke("Banke banke på, Hvem der?" +
+"– Finn" +
+"Finn hvem?" +
 "– Finn selv ud af det", "Vitser.dk","Banke Banke På"));
               em.persist(new Joke("Alle børnene gik forbi lorten undtagen Stella hun troede det var Nutella.", "Vitser-jokes.dk","Alle Børnene"));
               em.persist(new Joke("Alle børnene ristede pølser undtagen Niller han ristede sin diller", "Vitser-jokes.dk","AlleBørnene"));
