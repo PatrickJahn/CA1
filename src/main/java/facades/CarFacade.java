@@ -49,15 +49,15 @@ public class CarFacade {
         
     }
     
-       public List<CarDTO> getAllJokes(){
+       public List<CarDTO> getAllCars(){
         EntityManager em = emf.createEntityManager();
         try{
-            TypedQuery<Car> tq = em.createQuery("SELECT c FROM Car c", Car.class);
-            List<Car> cars = tq.getResultList();
+            TypedQuery<Car> query = em.createQuery("SELECT c FROM Car c", Car.class);
+            List<Car> cars = query.getResultList();
             List<CarDTO> CarDTO = new ArrayList<>(); 
-            for (Car c : cars){
+            cars.forEach(c -> {
                 CarDTO.add(new CarDTO(c));
-            }
+            });
             return CarDTO;
         }finally{  
             em.close();

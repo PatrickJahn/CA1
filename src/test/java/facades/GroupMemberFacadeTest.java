@@ -1,4 +1,4 @@
-package facades;
+/*package facades;
 
 import utils.EMF_Creator;
 import entities.GroupMember;
@@ -63,3 +63,4 @@ public class GroupMemberFacadeTest {
     }
 
 }
+*/
