@@ -27,7 +27,6 @@ let url = "/ca1/api/Car/all";
 //Following variable table used in makeTable() and destroyTable()
 var $table = $('#table');
 function makeTable(arr){ 
-    console.log(globalArr);
     destroyTable();
         $(function () {   
             $('#table').bootstrapTable({
@@ -52,17 +51,13 @@ let filterArr = arr.filter(car => car.price > value);
 makeTable(filterArr);
 }
 function selectBrand(arr){    
-console.log(arr);
 var value = document.getElementById("filterValue").value;
 let filterArr = arr.filter(car => car.model === value);
-console.log(filterArr);
 makeTable(filterArr);
 }
 function selectFuelType(arr){    
-console.log(arr);
 var value = document.getElementById("filterValue").value;
 let filterArr = arr.filter(car => car.fuelType === value);
-console.log(filterArr);
 makeTable(filterArr);
 }
 
