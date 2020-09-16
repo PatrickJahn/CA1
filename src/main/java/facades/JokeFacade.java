@@ -85,11 +85,10 @@ public class JokeFacade {
        public JokeDTO getRandomJoke(){
         EntityManager em = emf.createEntityManager();
         try{
-         long count = getJokeCount();
          
          Random r = new Random();
     int low = 10;
-    int high = Integer.parseInt(""+count);
+    int high = 18;
     int result = r.nextInt(high-low) + low;
         return getJokeByID((long) result);
     

@@ -23,12 +23,15 @@ fetch(url)
      Observe the output from the log-output above
      Now, just build your DOM changes using the data*/   
              switch (getBy) {
-                 case "id", "random":
+                 case "id":
                       document.getElementById("tblbody").innerHTML = createHtmlForOne(data);
                      break;
                  case "all":
                       document.getElementById("tblbody").innerHTML = createHtmlForMore(data);   
                       break;
+                  case "random":
+                        document.getElementById("tblbody").innerHTML = createHtmlForOne(data);
+                     break;
                  
                      
              }
