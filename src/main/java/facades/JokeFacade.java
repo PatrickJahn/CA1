@@ -4,6 +4,7 @@ import DTO.JokeDTO;
 import entities.Joke;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -81,6 +82,21 @@ public class JokeFacade {
         }
     }
      
+       public JokeDTO getRandomJoke(){
+        EntityManager em = emf.createEntityManager();
+        try{
+         long count = getJokeCount();
+         
+         Random r = new Random();
+    int low = 10;
+    int high = Integer.parseInt(""+count);
+    int result = r.nextInt(high-low) + low;
+        return getJokeByID((long) result);
+    
+        }finally{  
+            em.close();
+        }
+    }
      
       public void addJokes(){
         EntityManager em = emf.createEntityManager();

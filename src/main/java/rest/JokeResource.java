@@ -61,6 +61,19 @@ public class JokeResource {
         return Response.ok().entity(GSON.toJson(joke)).build();
     }
     
+    @Path("random")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getRandom() {
+        JokeDTO joke = FACADE.getRandomJoke();
+        if (joke.getJoke() == null) {
+         return Response.status(Response.Status.NOT_FOUND).entity("{\"Joke\":\"Not found\"}").build();
+        }
+        return Response.ok().entity(GSON.toJson(joke)).build();
+    }
+    
+    
+    
     @Path("addjokes")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
