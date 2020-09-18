@@ -1,10 +1,13 @@
 package facades;
 
+import DTO.GroupMemberDTO;
 import entities.GroupMember;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -24,7 +27,7 @@ public class GroupMemberFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static GroupMemberFacade getFacadeExample(EntityManagerFactory _emf) {
+    public static GroupMemberFacade createFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new GroupMemberFacade();
@@ -36,27 +39,36 @@ public class GroupMemberFacade {
         return emf.createEntityManager();
     }
     
-    //TODO Remove/Change this before use
-    public long getRenameMeCount(){
-        EntityManager em = emf.createEntityManager();
-        try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
-        }finally{  
-            em.close();
-        }
-        
-    }
+ 
     
-    public long getAllGroupMembers(){
+    public List<GroupMemberDTO> getAllGroupMembers(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
+            TypedQuery<GroupMember> tq = em.createQuery("SELECT g FROM GroupMember g", GroupMember.class);
+            List<GroupMember> groupMember = tq.getResultList();
+            List<GroupMemberDTO> groupMemberDTO = new ArrayList<>(); 
+            for (GroupMember gm : groupMember){
+                groupMemberDTO.add(new GroupMemberDTO(gm));
+            }
+            return groupMemberDTO;
         }finally{  
             em.close();
         }
         
     }
 
+    
+     public GroupMemberDTO getGroupMemberById(Long id){
+        EntityManager em = emf.createEntityManager();
+        try{
+            GroupMember groupMember = em.find(GroupMember.class, id);
+            return new GroupMemberDTO(groupMember);
+        }finally{  
+            em.close();
+        }
+    }
+     
+     
+     
+     
 }
