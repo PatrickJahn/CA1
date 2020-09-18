@@ -4,6 +4,7 @@ import DTO.JokeDTO;
 import entities.Joke;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -43,8 +44,8 @@ public class JokeFacade {
     public long getJokeCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(j) FROM Joke j").getSingleResult();
-            return renameMeCount;
+            long JokeCount = (long)em.createQuery("SELECT COUNT(j) FROM Joke j").getSingleResult();
+            return JokeCount;
         }finally{  
             em.close();
         }
@@ -72,13 +73,50 @@ public class JokeFacade {
         EntityManager em = emf.createEntityManager();
         try{
             Joke joke = em.find(Joke.class, id);
+            if (joke == null){
+                return new JokeDTO(new Joke());
+            }
             return new JokeDTO(joke);
         }finally{  
             em.close();
         }
     }
      
+       public JokeDTO getRandomJoke(){
+        EntityManager em = emf.createEntityManager();
+        try{
+         
+         Random r = new Random();
+    int low = 1;
+    int high = 10;
+    int result = r.nextInt(high-low) + low;
+        return getJokeByID((long) result);
+    
+        }finally{  
+            em.close();
+        }
+    }
      
-     
+      public void addJokes(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
+            
+            em.persist(new Joke("A programmer is told to \"go to hell\", he finds the worst part of that statement is the \"go to\"","reddit","Programming joke"));
+              em.persist(new Joke("Alle børnene gik forbi lorten undtagen Stella hun troede det var Nutella.", "Vitser-jokes.dk","Alle Børnene"));
+              em.persist(new Joke("Why do Java programmers wear glasses? - Beacuse they dont C#", "reddit","Programming joke"));
+              em.persist(new Joke("Alle børnene kom sikkert hjem fra fabrikken undtagen Ib og Arne de blev til chili konkarne", "Vitser-jokes.dk","Alle Børnene"));
+              em.persist(new Joke("Din mor er som en dårlig fodboldkamp… man har ikke lyst til at se på hende.", "Vitser-jokes.dk","Din Mor"));
+              em.persist(new Joke("Jeg overvejer at gifte mig med en tysker er det over grænsen?", "Vitser-jokes.dk","Dårlige jokes"));
+              em.persist(new Joke("ja, du har ringet til selvmords linjen bliv lige hængende", "Vitser-jokes.dk","Dårlige jokes"));
+              em.persist(new Joke("Hvad er ligheden mellem tofu og en dildo? De er begge alternativer til kød.", "bedstejokes.dk","Grove jokes"));
+              em.persist(new Joke("Hvordan får du gjort en nonne gravid? Klæd hende ud som en kordreng", "bedstejokes.dk","Grove jokes"));
+
+               em.getTransaction().commit();
+        }finally{  
+            em.close();
+        }
+    }
      
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,5 +72,18 @@ public class JokeFacadeTest {
         JokeDTO joke = facade.getJokeByID(j1.getId());
         assertEquals("Joke1", joke.getJoke());
     }
-
+    
+     @Test
+    public void testGetByIDNegativ() {
+        JokeDTO joke = facade.getJokeByID((long) 1100);
+        assertEquals(null, joke.getJoke());
+    }
+    
+    
+    @Test
+    public void testAddJokes() {
+        facade.addJokes();
+        assertEquals(9, facade.getJokeCount(), "Expects three rows in the database");
+    }
+    
 }

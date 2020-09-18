@@ -22,7 +22,7 @@ public class Joke implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String joke;
     private String reference; 
@@ -32,9 +32,6 @@ public class Joke implements Serializable {
     }
 
     
-    
-
-
     public Joke(String joke, String reference, String type) {
         this.joke = joke;
         this.reference = reference;

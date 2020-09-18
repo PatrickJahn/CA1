@@ -1,6 +1,6 @@
 package rest;
 
-import entities.GroupMember;
+import entities.Joke;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -14,22 +14,27 @@ import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 //Uncomment the line below, to temporarily disable this test
+//<<<<<<< HEAD
 
 @Disabled
 
 
 
+
+//>>>>>>> master
+
 public class JokeResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static GroupMember r1,r2;
+    private static Joke r1,r2;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -66,8 +71,8 @@ public class JokeResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new GroupMember("Some txt","More text");
-        r2 = new GroupMember("aaa","bbb");
+        r1 = new Joke("Joke1","More text", "test");
+        r2 = new Joke("Joke2","bbb", "ccc");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
@@ -80,34 +85,78 @@ public class JokeResourceTest {
     }
     
     @Test
-    @Disabled
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
-        given().when().get("/xxx").then().statusCode(200);
+        given().when().get("/Joke").then().statusCode(200);
     }
    
     //This test assumes the database contains two rows
     
    @Test
-   @Disabled
     public void testDummyMsg() throws Exception {
         given()
         .contentType("application/json")
-        .get("/xxx/").then()
+        .get("/Joke/").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("msg", equalTo("Hello World"));   
     }
     
     @Test
-    @Disabled
     public void testCount() throws Exception {
         given()
         .contentType("application/json")
-        .get("/xxx/count").then()
+        .get("/Joke/count").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("count", equalTo(2));   
+    }
+    
+    
+    @Test
+    public void testAll() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/Joke/all").then()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("size()", equalTo(2))
+        .and()
+        .body("joke", hasItems("Joke1", "Joke2"));
+         
+    }
+    
+    
+    
+    @Test
+    public void testId() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/Joke/" + r1.getId()).then()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("joke", equalTo("Joke1"));   
+    }
+    
+     @Test
+    public void testIdNegativ() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/Joke/2222").then()
+        .assertThat()
+        .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode())
+        .body("Joke", equalTo("Not found"));   
+    }
+    
+    
+      @Test
+    public void testAddJokes() throws Exception {
+        given()
+        .contentType("application/json")
+        .get("/Joke/addjokes").then()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("Jokes", equalTo("Added"));   
     }
 }
         
