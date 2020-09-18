@@ -51,6 +51,7 @@
   overflow:hidden;
   animation: moving 10s linear -2s infinite;
 }
+
 .carbody{
   animation: carmove 3.1s infinite linear;
   background: url('https://i.stack.imgur.com/xWNOG.png') 0 0;
