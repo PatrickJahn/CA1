@@ -9,19 +9,28 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="stylesheet" href="jokeCss.css">
     </head>
     <body>
-       
-            
+                      
+        <a href="index.html">Tilbage til index</a>
+        <h1 id="hh">JOKES</h1>
+    
               <form id="jokeForm">
-  <input type="text" id="fid" name="fid">
+     
+  <input type="text" id="fid" name="fid" placeholder="Indtast id">
   <input id="id" type="submit" value="Get joke by id">
+  <br>
+     <input id="random" type="submit" value="Get random">
     <input id="all" type="submit" value="Get all">
+  
     </form>
             
-         <div id="tbl">
-        </div>
-        
+       
+        <table id="tbl"><thead id="tblHead"><tr><th>Joke</th><th>Reference</th><th>Type</th><tbody id="tblbody"></tbody></table>
+   
+          
+       
         <script src="JokeScript.js"></script>
     </body>
 </html>

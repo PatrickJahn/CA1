@@ -8,7 +8,7 @@ document.getElementById("jokeForm").addEventListener('click', getInfo);
     event.stopPropagation();
     event.preventDefault();
     
-    
+    bounce();
     var getBy = event.target.id;
     
   var urlAddOn = getUrlAddOn(event.target.id);
@@ -24,11 +24,14 @@ fetch(url)
      Now, just build your DOM changes using the data*/   
              switch (getBy) {
                  case "id":
-                      document.getElementById("tbl").innerHTML = createHtmlForOne(data);
+                      document.getElementById("tblbody").innerHTML = createHtmlForOne(data);
                      break;
                  case "all":
-                      document.getElementById("tbl").innerHTML = createHtmlForMore(data);   
+                      document.getElementById("tblbody").innerHTML = createHtmlForMore(data);   
                       break;
+                  case "random":
+                        document.getElementById("tblbody").innerHTML = createHtmlForOne(data);
+                     break;
                  
                      
              }
@@ -47,6 +50,8 @@ function getUrlAddOn(id){
           return document.getElementById("fid").value;
        case "all":
        return "all";
+        case "random":
+       return "random";
        default: 
            return "";
     }
@@ -55,10 +60,14 @@ function getUrlAddOn(id){
 }
 
 var createHtmlForOne = function(json){
-     var html = "<p> <b>Title:</b> " + json.joke + "<br>"+
-            "Year: " + json.reference + "<br> "+
-            "Genre: " + json.type +  
-            "</p>";
+    
+    if (json.Joke == "Not found"){
+        return "<tr><td></td><td>" + "There is no Jokes with that ID" + "</td><td></td>";
+    }
+     var html = "<tr><td>" + json.joke + "</td>"+
+            "<td>" + json.reference + "</td>"+
+            "<td>: " + json.type +  
+            "</td></tr>";
                 
     return html;
     
@@ -73,8 +82,20 @@ var createHtmlForMore = function(json){
                 "<td>"+json[obj].type+"</td></tr>"); 
     genHtml = res;
     }
-    
-     var table ="<table><thead><tr><th>Joke</th><th>Reference</th><th>Type</th><tbody>" + genHtml + "</tbody></table>" ;
      
-    return table;
+    return genHtml;
 };
+
+
+function bounce(){
+    if (event.target.id !== "fid"){
+event.stopPropagation();
+    event.preventDefault();
+  var element =  document.getElementById("hh");
+    element.classList.add("bounce");
+    console.log(event.target.id);
+  setTimeout(function (){
+      element.classList.remove("bounce");
+  },1000);
+    }
+}
