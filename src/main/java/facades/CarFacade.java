@@ -3,7 +3,6 @@ package facades;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import DTO.CarDTO;
 import entities.Car;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class CarFacade {
         return emf.createEntityManager();
     }
  
-    public long getRenameMeCount(){
+    public long getCount(){
         EntityManager em = emf.createEntityManager();
         try{
             long renameMeCount = (long)em.createQuery("SELECT COUNT(c) FROM Car c").getSingleResult();

@@ -1,7 +1,7 @@
-/*package facades;
-
+package facades;
+import entities.*;
+import DTO.CarDTO;
 import utils.EMF_Creator;
-import entities.GroupMember;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -11,15 +11,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import entities.*;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-@Disabled
 public class CarFacadeTest {
 
     private static EntityManagerFactory emf;
     private static CarFacade facade;
-
+    private Car c1 = new Car();
     public CarFacadeTest() {
     }
 
@@ -36,14 +36,15 @@ public class CarFacadeTest {
 
     // Setup the DataBase in a known state BEFORE EACH TEST
     //TODO -- Make sure to change the script below to use YOUR OWN entity class
-    @BeforeEach
+     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new GroupMember("Some txt", "More text"));
-            em.persist(new GroupMember("aaa", "bbb"));
+            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            c1 = new Car("Volvo","B18",2010,"Benzin",100,12);
+            em.persist(c1);
+            em.persist(new Car("Fiat","Bravo",2007,"Diesel",200,10));
 
             em.getTransaction().commit();
         } finally {
@@ -56,11 +57,8 @@ public class CarFacadeTest {
 //        Remove any data after each test was run
     }
 
-    // TODO: Delete or change this method 
-    @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+   @Test
+    public void testGetCount() {
+        assertEquals(2, facade.getCount(), "Expects two rows in the database");
     }
-
 }
-*/

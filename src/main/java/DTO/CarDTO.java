@@ -76,5 +76,10 @@ public class CarDTO {
         this.fuelType = fuelType;
     }
 
+    @Override
+    public String toString() {
+        return "CarDTO{" + "id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", price=" + price + ", fuelType=" + fuelType + '}';
+    }
+
 
 }

@@ -22,7 +22,7 @@ public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String brand;
     private String model;
@@ -35,6 +35,15 @@ public class Car implements Serializable {
 
     public Car(Long id, String brand, String model, int year, String fuelType, double price, float turnOverRate) {
         this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.fuelType = fuelType;
+        this.price = price;
+        this.turnOverRate = turnOverRate;
+    }
+
+    public Car(String brand, String model, int year, String fuelType, double price, float turnOverRate) {
         this.brand = brand;
         this.model = model;
         this.year = year;

@@ -22,11 +22,18 @@ public class CarResource {
     
     private static final CarFacade FACADE =  CarFacade.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-            
+           
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
+    }
+     @Path("count")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getCarCount() {
+        long count = FACADE.getCount();  
+        return "{\"count\":"+count+"}"; 
     }
    @Path("all")
     @GET

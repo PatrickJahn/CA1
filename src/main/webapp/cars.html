@@ -18,7 +18,7 @@ let globalArr;
 
 //method of fetching data and here i also call makeTable(), i would prefer if it was not dependant on other methods, but asynchronous code is causing me issues
 async function fetcherAndMaker(){
-let url = "/jpareststarter/api/Car/all";
+let url = "/CA1/api/Car/all";
     let response = await fetch(url);
      globalArr = await response.json();
     await destroyTable();
