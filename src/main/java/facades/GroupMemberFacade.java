@@ -70,6 +70,7 @@ public class GroupMemberFacade {
             em.close();
         }
         
+        
     }
     public long getGroupMembersCount(){
         EntityManager em = emf.createEntityManager();

@@ -1,10 +1,10 @@
 package rest;
 
 import DTO.GroupMemberDTO;
+import facades.GroupMemberFacade;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import utils.EMF_Creator;
-import facades.GroupMemberFacade;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
