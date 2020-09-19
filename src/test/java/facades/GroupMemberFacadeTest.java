@@ -62,11 +62,10 @@ public class GroupMemberFacadeTest {
 //        Remove any data after each test was run
     }
 
-    /**
     @Test
     public void testAddGroupMembers() {
-        facade.addGroupMembers();
-        assertEquals(2, facade.getGroupMembers(), "Expects 2 rows in the database");
+
+        assertEquals(2, facade.getGroupMembersCount(), "Expects 2 rows in the database");
     }
- */
+ 
 }

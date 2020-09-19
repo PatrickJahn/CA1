@@ -71,10 +71,10 @@ public class GroupMemberFacade {
         }
         
     }
-    public long getGroupMembers(){
+    public long getGroupMembersCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long numberOfGroupMembers = (long)em.createQuery("SELECT COUNT(g) FROM GroupMember g").getMaxResults();
+            long numberOfGroupMembers = (long)em.createQuery("SELECT COUNT(g) FROM GroupMember g").getSingleResult();
             return numberOfGroupMembers;
         }finally{  
             em.close();
@@ -82,23 +82,7 @@ public class GroupMemberFacade {
         
     }
     
-          public void addGroupMembers() {
-        EntityManager em = emf.createEntityManager();
-        try{
-            em.getTransaction().begin();
-            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
-            
-            em.persist(new GroupMember(1, "JegHettarMartin", "HawwyPotter"));
-            em.persist(new GroupMember(2, "Poul, Poul Pott", "King Cock"));
-            em.persist(new GroupMember(3, "Jeppe Kofoed", "Videoer af 15årige piger hvis jeg også kan knalde dem?"));
-          
-             
-
-               em.getTransaction().commit();
-        }finally{  
-            em.close();
-        }
-    }
+        
 
     
      public GroupMemberDTO getGroupMemberById(Long id){
