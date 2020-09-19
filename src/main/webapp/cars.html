@@ -61,54 +61,6 @@ var value = document.getElementById("filterValue").value;
 let filterArr = arr.filter(car => car.fuelType === value);
 makeTable(filterArr);
 }
-function sort2(arr){    
-var value = document.getElementById("filterValue").value;
-let filterArr = arr.filter(car => car.fuelType === value);
-makeTable(filterArr);
-}
- function sort(arr) {
-var value = document.getElementById("filterValue").value.toLowerCase();
-var filterArr = arr.sort(function (a, b) {
-                    if (value === "year") {
-                        return a.year - b.year;
-                    }
-                    if (value === "price") {
-                        return a.price - b.price;
-                    }
-                    if (value === "brand") {
-                        if (a.make < b.make) {
-                            return -1;
-                        }
-                        if (a.make > b.make) {
-                            return 1;
-                        }
-                        return 0;
-                    }
-                    if (value === "model") {
-                        if (a.model < b.model) {
-                            return -1;
-                        }
-                        if (a.model > b.model) {
-                            return 1;
-                        }
-                        return 0;
-                    }
-                      if (value === "brand") {
-                        if (a.brand < b.brand) {
-                            return -1;
-                        }
-                        if (a.brand > b.brand) {
-                            return 1;
-                        }
-                        return 0;
-                    }
-                 });
-                console.log(filterArr);
-                makeTable(filterArr);
-                
-            }
-
-
 
 </script>
 </head>
@@ -131,7 +83,7 @@ var filterArr = arr.sort(function (a, b) {
         </thead>
     </table>
      <form>
-         <input type="text" id="filterValue" value="Insert value to filter by"> <button class="btn btn-primary" type="submit"onclick="lessThan(globalArr)">Price less than</button><button class="btn btn-primary" type="submit"onclick="higherThan(globalArr)">Price higher than</button><button class="btn btn-primary" type="submit"onclick="selectBrand(globalArr)">Show by Brand</button><button class="btn btn-primary" type="submit"onclick="selectFuelType(globalArr)">Show by Fuel type</button><button class="btn btn-primary" type="submit"onclick="sort(globalArr)">Sort by</button><button class="btn btn-primary" type="submit"onclick="makeTable(globalArr)">Show all</button>
+         <input type="text" id="filterValue" value="Insert value to filter by"> <button class="btn btn-primary" type="submit"onclick="lessThan(globalArr)">Price less than</button><button class="btn btn-primary" type="submit"onclick="higherThan(globalArr)">Price higher than</button><button class="btn btn-primary" type="submit"onclick="selectBrand(globalArr)">Show by Brand</button><button class="btn btn-primary" type="submit"onclick="selectFuelType(globalArr)">Show by Fuel type</button><button class="btn btn-primary" type="submit"onclick="makeTable(globalArr)">Show all</button>
      </form>
     </div>
     
