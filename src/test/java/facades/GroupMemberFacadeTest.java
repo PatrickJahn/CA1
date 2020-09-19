@@ -68,4 +68,5 @@ public class GroupMemberFacadeTest {
         assertEquals(2, facade.getGroupMembersCount(), "Expects 2 rows in the database");
     }
  
+
 }
