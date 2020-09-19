@@ -17,9 +17,22 @@ public class GroupMemberFacade {
 
     private static GroupMemberFacade instance;
     private static EntityManagerFactory emf;
-    
+
     //Private Constructor to ensure Singleton
     private GroupMemberFacade() {}
+    
+    
+    
+    public static GroupMemberFacade getFacadeExample(EntityManagerFactory _emf) {
+        if (instance == null) {
+            emf = _emf;
+            instance = new GroupMemberFacade();
+        }
+        return instance;
+    }
+    
+    
+  
     
     
     /**
@@ -27,13 +40,15 @@ public class GroupMemberFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
+    
+    /**
     public static GroupMemberFacade createFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new GroupMemberFacade();
         }
         return instance;
-    }
+    }  */
 
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -55,6 +70,34 @@ public class GroupMemberFacade {
             em.close();
         }
         
+    }
+    public long getGroupMembers(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            long numberOfGroupMembers = (long)em.createQuery("SELECT COUNT(g) FROM GroupMember g").getMaxResults();
+            return numberOfGroupMembers;
+        }finally{  
+            em.close();
+        }
+        
+    }
+    
+          public void addGroupMembers() {
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
+            
+            em.persist(new GroupMember(1, "JegHettarMartin", "HawwyPotter"));
+            em.persist(new GroupMember(2, "Poul, Poul Pott", "King Cock"));
+            em.persist(new GroupMember(3, "Jeppe Kofoed", "Videoer af 15årige piger hvis jeg også kan knalde dem?"));
+          
+             
+
+               em.getTransaction().commit();
+        }finally{  
+            em.close();
+        }
     }
 
     

@@ -20,6 +20,10 @@ public class GroupMember implements Serializable {
     private String name;
     private String yndlingsFilm;
 
+    public GroupMember(int i, String yoyoyo, String boellebob) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getYndlingsFilm() {
         return yndlingsFilm;
     }
@@ -45,6 +49,10 @@ public class GroupMember implements Serializable {
 
     
     public GroupMember() {
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
         
    
