@@ -2,7 +2,7 @@
 
 console.log("Script running");
 
-var url = "/jpareststarter/api/GroupMember/all";
+var url = "/CA1/api/GroupMember/all";
 
 var liste; 
 
