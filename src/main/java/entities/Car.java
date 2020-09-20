@@ -108,5 +108,10 @@ public class Car implements Serializable {
         this.turnOverRate = turnOverRate;
     }
 
+    @Override
+    public String toString() {
+        return "Car{" + "id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", fuelType=" + fuelType + ", price=" + price + ", turnOverRate=" + turnOverRate + '}';
+    }
+
    
 }
