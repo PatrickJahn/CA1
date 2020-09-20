@@ -63,5 +63,30 @@ public class CarFacade {
         }
         
     }
+         public void addCars(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            
+            em.persist(new Car("Volvo","V40",2004,"Diesel",80000,12));
+            em.persist(new Car("Volvo","XC90",2020,"Gasoline",350000,20));
+            em.persist(new Car("Fiat","500",2012,"Gasoline",45000,30));
+            em.persist(new Car("Fiat","Bravo",2008,"Diesel",32000,54));
+            em.persist(new Car("Fiat","Panda",2020,"Hybrid",200000,40));
+            em.persist(new Car("VW","E-UP",2020,"Electirc",320000,20));
+            em.persist(new Car("VW","Touran",2015,"Diesel",84000,32));
+            em.persist(new Car("Seat","Arona",2015,"Gasoline",180000,34));
+            em.persist(new Car("Seat","Leon",2008,"Gasoline",35000,12));
+            em.persist(new Car("Toyota","Rav-4",2020,"Hybrid",400000,58));
+            em.persist(new Car("Renault","Zoe",2015,"Electric",12450,83));
+            em.persist(new Car("Renault","Captur",2012,"Diesel",99900,44));
+        
+            
+            em.getTransaction().commit();
+        }finally{  
+            em.close();
+        }
+    }
 
 }

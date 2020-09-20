@@ -42,5 +42,12 @@ public class CarResource {
         List<CarDTO> cars = FACADE.getAllCars();
         return GSON.toJson(cars);
     }
-
+    @Path("addcars")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String addCars() {
+        FACADE.addCars();
+        return "{\"Cars\":\"Added\"}";
+    }
+    
 }
