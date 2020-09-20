@@ -83,7 +83,7 @@ public class JokeFacadeTest {
     @Test
     public void testAddJokes() {
         facade.addJokes();
-        assertEquals(9, facade.getJokeCount(), "Expects three rows in the database");
+        assertEquals(9, facade.getJokeCount(), "Expects two rows in the database");
     }
     
 }

@@ -1,9 +1,10 @@
 package rest;
-
+import DTO.CarDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import utils.EMF_Creator;
 import facades.CarFacade;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,18 +22,25 @@ public class CarResource {
     
     private static final CarFacade FACADE =  CarFacade.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-            
+           
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
-    @Path("count")
+     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getRenameMeCount() {
-        long count = FACADE.getRenameMeCount();
-        //System.out.println("--------------->"+count);
-        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+    public String getCarCount() {
+        long count = FACADE.getCount();  
+        return "{\"count\":"+count+"}"; 
     }
+   @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllJokes() {
+        List<CarDTO> cars = FACADE.getAllCars();
+        return GSON.toJson(cars);
+    }
+
 }

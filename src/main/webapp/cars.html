@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>Cars</title>
+    <link rel="stylesheet" href="carsstyle.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+
+   
+
+
+<script>
+//a global array variable used for filtering, sadly not a constant since i couldnt figure a good way to assign it outside of a function scope    
+let globalArr;   
+
+//method of fetching data and here i also call makeTable(), i would prefer if it was not dependant on other methods, but asynchronous code is causing me issues
+async function fetcherAndMaker(){
+let url = "/CA1/api/Car/all";
+    let response = await fetch(url);
+     globalArr = await response.json();
+    await destroyTable();
+    await makeTable(globalArr);
+    await console.log(globalArr);
+}
+//Following variable table used in makeTable() and destroyTable()
+var $table = $('#table');
+function makeTable(arr){ 
+    destroyTable();
+        $(function () {   
+            $('#table').bootstrapTable({
+        data: arr
+    });
+});
+event.preventDefault();
+}
+
+function destroyTable(){
+    $('#table').bootstrapTable("destroy");
+}
+//following methods are ways of creating a filtered array on certain conditions decided by the html element with id filterValue. !do not overwrite globalArr
+function lessThan(arr){
+var value = document.getElementById("filterValue").value;
+let filterArr = arr.filter(car => car.price < value);
+makeTable(filterArr);
+}
+function higherThan(arr){
+var value = document.getElementById("filterValue").value;
+let filterArr = arr.filter(car => car.price > value);
+makeTable(filterArr);
+}
+function selectBrand(arr){    
+var value = document.getElementById("filterValue").value;
+let filterArr = arr.filter(car => car.model === value);
+makeTable(filterArr);
+}
+function selectFuelType(arr){    
+var value = document.getElementById("filterValue").value;
+let filterArr = arr.filter(car => car.fuelType === value);
+makeTable(filterArr);
+}
+
+</script>
+</head>
+<body onload="fetcherAndMaker()"> <!--Here we ensure that globalArr will be called once-->
+  <form action="https://theonegruppetorulethemall.com/CA1/">
+        <button class="btn btn-primary hBack" type="submit">&#x2190; Gå tilbage til hovedsiden</button>
+</form>
+    <div class="container">
+        <table id="table" data-height="230">
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="brand">Brand</th>
+                <th data-field="model">Model</th>
+                <th data-field="fuelType">Fuel type</th>
+                <th data-field="price">Price</th>
+                <th data-field="year">Year</th>
+                 
+            </tr>
+        </thead>
+    </table>
+     <form>
+         <input type="text" id="filterValue" value="Insert value to filter by"> <button class="btn btn-primary" type="submit"onclick="lessThan(globalArr)">Price less than</button><button class="btn btn-primary" type="submit"onclick="higherThan(globalArr)">Price higher than</button><button class="btn btn-primary" type="submit"onclick="selectBrand(globalArr)">Show by Brand</button><button class="btn btn-primary" type="submit"onclick="selectFuelType(globalArr)">Show by Fuel Type</button><button class="btn btn-primary" type="submit"onclick="makeTable(globalArr)">Show all</button>
+     </form>
+    </div>
+    
+ 
+   <div class="car">
+  <div class="carbody"></div>
+  <div class="weel weel1"></div>
+  <div class="weel weel2"></div>
+    </div>
+    
+</body>
+</html>
