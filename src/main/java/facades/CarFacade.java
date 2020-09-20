@@ -81,8 +81,7 @@ public class CarFacade {
             em.persist(new Car("Toyota","Rav-4",2020,"Hybrid",400000,58));
             em.persist(new Car("Renault","Zoe",2015,"Electric",12450,83));
             em.persist(new Car("Renault","Captur",2012,"Diesel",99900,44));
-        
-            
+       
             em.getTransaction().commit();
         }finally{  
             em.close();

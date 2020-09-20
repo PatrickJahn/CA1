@@ -33,16 +33,6 @@ public class Car implements Serializable {
     public Car() {
     }
 
-    public Car(Long id, String brand, String model, int year, String fuelType, double price, float turnOverRate) {
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.fuelType = fuelType;
-        this.price = price;
-        this.turnOverRate = turnOverRate;
-    }
-
     public Car(String brand, String model, int year, String fuelType, double price, float turnOverRate) {
         this.brand = brand;
         this.model = model;
@@ -51,6 +41,7 @@ public class Car implements Serializable {
         this.price = price;
         this.turnOverRate = turnOverRate;
     }
+
 
     public Long getId() {
         return id;
