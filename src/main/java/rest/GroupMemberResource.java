@@ -39,4 +39,11 @@ public class GroupMemberResource {
         //System.out.println("--------------->"+count);
         return GSON.toJson(allGroupMembers);
     }
+  @Path("addmembers")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String addMembers() {
+        FACADE.addMembers();
+        return "{\"Members\":\"Added\"}";
+    }
 }

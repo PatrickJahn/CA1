@@ -95,7 +95,23 @@ public class GroupMemberFacade {
             em.close();
         }
     }
-     
+      public void addMembers(){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
+            
+            em.persist(new GroupMember("Mads Bech","Alene Hjemme Krystalkraniets Kongerige"));
+            em.persist(new GroupMember("Patrick Jahn","Bjørne Brødre og Fangen fra Azkaban"));
+            em.persist(new GroupMember("Benjamin Iglesias","Star Trek: Klonernes Angreb"));
+           
+           
+       
+            em.getTransaction().commit();
+        }finally{  
+            em.close();
+        }
+    }
      
      
      
