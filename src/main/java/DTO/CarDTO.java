@@ -18,11 +18,8 @@ public class CarDTO {
     private int year;
     private double price; 
     private String fuelType;
-   
-
-    public CarDTO() {
+      public CarDTO() {
     }
-
     public CarDTO(Car car) {
         this.id = car.getId();
         this.brand = car.getBrand();

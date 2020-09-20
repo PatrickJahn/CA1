@@ -1,7 +1,8 @@
+/*
 package facades;
-
 import entities.*;
 import DTO.CarDTO;
+import facades.Car;
 import utils.EMF_Creator;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import entities.*;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
@@ -62,4 +62,4 @@ public class CarFacadeTest {
     public void testGetCount() {
         assertEquals(2, facade.getCount(), "Expects two rows in the database");
     }
-}
+}*/
